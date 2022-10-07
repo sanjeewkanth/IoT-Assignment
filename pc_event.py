@@ -83,7 +83,7 @@ while True:
     #else:
         #time.sleep(1)
         #make the LED BLINK if the RAM usage is more than 80% 
-    if RAM >= 1:
+    if RAM >= 80:
         board.digital[13].write(1)
         time.sleep(1/40)
         board.digital[13].write(0)
