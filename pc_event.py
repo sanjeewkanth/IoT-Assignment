@@ -49,13 +49,14 @@ while True:
         #publish the event on MQTT
 
 
-        print("Just published " + str(RAM) + " to Topic /sanjeewkanth/pc-event")
-        print("Just published " + str(CPU) + " to Topic /sanjeewkanth/pc-event")
-        print("Just published " + str(round(time_per)) + " to Topic /sanjeewkanth/pc-event")
         cpu_data = str(CPU)
         cpu_per = cpu_data + "%"
         ram_data = str(RAM)
         ram_per = ram_data + "%"
+
+        print("RAM usage is " + cpu_per)
+        print("CPU usage is " + ram_per)
+        print(time.time())
 
 
         pc_event = {
@@ -72,15 +73,17 @@ while True:
             client.publish("/sanjeewkanth/pc-event", m_out)
             #client.publish("/sanjeewkanth/pc-event", time_per)
             write_json(cpu_event,'cpu.json','cpu-event')
+            print("Just published " + str(CPU) + " to Topic /sanjeewkanth/pc-event")
+            print("Just published " + time_per + " to Topic /sanjeewkanth/pc-event")
 
 
         #update the JSON file
         write_json(pc_event,'pc.json','pc-event')
         time.sleep(0.7)
-    else:
-        time.sleep(1)
+    #else:
+        #time.sleep(1)
         #make the LED BLINK if the RAM usage is more than 80% 
-    if RAM >= 80:
+    if RAM >= 1:
         board.digital[13].write(1)
         time.sleep(1/40)
         board.digital[13].write(0)
